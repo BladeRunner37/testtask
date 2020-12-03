@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot' version '2.4.0'
+    id 'io.spring.dependency-management' version "1.0.10.RELEASE"
+}
+
+group 'ru.bladerunner37'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    manifest {
+        attributes 'version': version
+    }
+}
+
+jar {
+    mainClassName="ru.bladerunner37.testtask.TestTaskApplication"
+}
+
+artifacts {
+    archives bootJar
+}
+
+dependencies {
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.4.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.4.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-access', version: '1.2.3'
+    compile group: 'org.liquibase', name: 'liquibase-core', version: '4.2.0'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.14'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.12.0'
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.4.0'
+}

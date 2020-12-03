@@ -1,0 +1,7 @@
+- run resources/initDB.sql in your postgres console to create application database, WARNING: if you have database named 'testdb' it will be dropped
+- define your database url and credentials in resources/application.yml
+- use gradle clean build to build application
+- run application with 2 arguments
+- 1st argument: method name, 'serialize' - to write database table content to JSON file, 'deserialize' - to write content of JSON file to database
+- 2nd argument: path to JSON file to serialize/deserialize
+- schema and table will be created automatically by liquibase when application starts
