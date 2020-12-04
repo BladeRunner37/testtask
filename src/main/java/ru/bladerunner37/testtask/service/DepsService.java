@@ -1,6 +1,6 @@
 package ru.bladerunner37.testtask.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bladerunner37.testtask.dao.DepsDao;
@@ -9,16 +9,11 @@ import ru.bladerunner37.testtask.dto.DepsDto;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class DepsService {
 
     private final DepsDao depsDao;
     private final Converter converter;
-
-    @Autowired
-    public DepsService(DepsDao depsDao, Converter converter) {
-        this.depsDao = depsDao;
-        this.converter = converter;
-    }
 
     @Transactional(readOnly = true)
     public Set<DepsDto> findAll() {

@@ -1,8 +1,7 @@
 package ru.bladerunner37.testtask.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bladerunner37.testtask.dto.DepsDto;
@@ -11,22 +10,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class Merger {
-
-    private static final Logger LOG = LoggerFactory.getLogger(Merger.class);
 
     private final DepsService depsService;
 
-    @Autowired
-    public Merger(DepsService depsService) {
-        this.depsService = depsService;
-    }
-
     @Transactional
     public void merge(Set<DepsDto> dtos) {
-        LOG.info("Start merging dtos: {}", dtos.size());
+        log.info("Start merging dtos: {}", dtos.size());
         Set<DepsDto> prev = depsService.findAll();
-        LOG.info("Found in DB: {}", prev.size());
+        log.info("Found in DB: {}", prev.size());
         Set<Integer> prevIds = prev.stream()
                 .map(DepsDto::getId)
                 .collect(Collectors.toSet());
@@ -43,10 +37,10 @@ public class Merger {
                 .collect(Collectors.toSet());
         prevIds.removeAll(idsToSave);
         depsService.deleteIds(prevIds);
-        LOG.info("Deleted from DB: {}", prevIds.stream()
+        log.info("Deleted from DB: {}", prevIds.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(";")));
         depsService.saveDtos(prev);
-        LOG.info("Saved or updated dtos: {}", prev.size());
+        log.info("Saved or updated dtos: {}", prev.size());
     }
 }
