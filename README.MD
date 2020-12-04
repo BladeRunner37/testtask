@@ -1,5 +1,5 @@
 Spring boot console application
-Stack: Spring boot/data-jpa/test, Jackson, Liquibase, Junit, Mockito, Slf4j/logback, gradle
+Stack: Spring boot/data-jpa/test, Lombok, Jackson, Liquibase, Junit, Mockito, Slf4j/logback, gradle
 
 
 - run resources/initDB.sql in your postgres console to create application database, WARNING: if you have database named 'testdb' it will be dropped
